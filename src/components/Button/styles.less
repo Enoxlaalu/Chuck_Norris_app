@@ -1,0 +1,24 @@
+@import "src/variables";
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  color: @blue;
+  background-color: @white;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px @grayTransparentDark;
+  transition: box-shadow 0.3s;
+  outline: none;
+}
+
+.button:hover {
+  box-shadow: 0 0 0 3px @grayTransparentDark;
+}

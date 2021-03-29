@@ -1,0 +1,13 @@
+@import "src/variables";
+
+.contentBody {
+  display: grid;
+  grid-template-columns: auto 1fr;
+
+  & header {
+    grid-column: 1 / 3;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 1px 0 0 @grayTransparentDark;
+  }
+}

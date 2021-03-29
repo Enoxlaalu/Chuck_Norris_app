@@ -1,0 +1,29 @@
+@import "src/variables";
+
+.input {
+  align-items: center;
+  background-color: @grayTransparent;
+  border-radius: 4px;
+  transition: box-shadow 0.3s;
+  min-width: 400px;
+
+  & input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    font-size: 16px;
+    line-height: 24px;
+    color: @gray80;
+    padding: 16px;
+
+    &::placeholder {
+      color: @gray70
+    }
+  }
+}
+
+.input.focused {
+  box-shadow: 0 0 0 2px @blue;
+  background-color: @white;
+}
