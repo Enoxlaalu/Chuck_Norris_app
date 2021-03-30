@@ -1,8 +1,15 @@
 @import "src/variables";
 
 .mainContent {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
   padding: 24px;
   text-align: center;
+
+  & h2 {
+    margin: 18px 0;
+  }
 
   & .searchWrapper {
     display: grid;
@@ -12,5 +19,9 @@
 
   & .warning {
     color: @red;
+  }
+
+  & .jokesWrapper {
+    overflow: auto;
   }
 }

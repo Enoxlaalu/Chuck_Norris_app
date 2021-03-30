@@ -6,12 +6,14 @@ import Input
     from 'src/components/Input';
 import Button
     from 'src/components/Button';
+import JokesList
+    from 'src/pages/components/MainContent/JokesList';
 
 type TProps = Partial<IReducerState> & {
     makeSearch: (value: string) => void
 }
 
-const MainContent: React.FC<TProps> = ({ randomJoke, makeSearch, foundJokes, searchApplied }) => {
+const MainContent: React.FC<TProps> = ({ randomJoke, makeSearch, jokesList, searchApplied, activeCategory }) => {
     const [ inputValue, setInputValue ] = React.useState('');
     const [ error, showError ] = React.useState('');
 
@@ -39,14 +41,8 @@ const MainContent: React.FC<TProps> = ({ randomJoke, makeSearch, foundJokes, sea
     const renderContent = () => {
         if (error) return <p className={'warning'}>{error}</p>;
         if (searchApplied) {
-            if (foundJokes.length) {
-                return foundJokes.map(joke => {
-                    return (
-                        <p>
-                            {joke}
-                        </p>
-                    );
-                });
+            if (jokesList.length) {
+                return <JokesList jokesList={jokesList} />;
             } else {
                 return <p>
                     Sorry, no jokes for current query :( Try another one!
@@ -54,7 +50,7 @@ const MainContent: React.FC<TProps> = ({ randomJoke, makeSearch, foundJokes, sea
             }
         } else {
             return <>
-                <h2>Random Joke:</h2>
+                <h2>Random Joke{!activeCategory.includes('all') ? ` from ${activeCategory.toUpperCase()} category` : ''}:</h2>
                 {randomJoke}
             </>
         }
@@ -76,7 +72,9 @@ const MainContent: React.FC<TProps> = ({ randomJoke, makeSearch, foundJokes, sea
                 onClick={onSearchButtonClick}
             />
         </div>
-        { renderContent() }
+        <section className={'jokesWrapper'}>
+            { renderContent() }
+        </section>
     </main>;
 };
 

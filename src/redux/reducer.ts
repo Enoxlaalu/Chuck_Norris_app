@@ -3,16 +3,20 @@ import { IReducerState } from 'src/redux/types';
 const initialState = {
     randomJoke: '',
     categories: [],
-    foundJokes: [],
-    searchApplied: false
+    jokesList: [],
+    searchApplied: false,
+    activeCategory: 'all categories'
 };
 
 const rootReducer = (state: IReducerState = initialState, action) => {
     switch (action.type) {
         case 'SET_RANDOM_JOKE': {
+            const { randomJoke, category } = action.payload;
+
             return {
                 ...state,
-                randomJoke: action.payload
+                randomJoke,
+                activeCategory: category ? category : initialState.activeCategory
             }
         }
         case 'SET_CATEGORIES': {
@@ -25,7 +29,7 @@ const rootReducer = (state: IReducerState = initialState, action) => {
             const { jokesArray, searchApplied } = action.payload;
             return {
                 ...state,
-                foundJokes: jokesArray,
+                jokesList: jokesArray,
                 searchApplied
             }
         }

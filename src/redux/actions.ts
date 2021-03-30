@@ -3,14 +3,17 @@ const makeRequest = async (url) => {
     return await response.json();
 }
 
-export const getRandomJoke = () => async dispatch => {
+export const getRandomJoke = (category?: string) => async dispatch => {
     try {
-        const { value } = await makeRequest('https://api.chucknorris.io/jokes/random');
+        const { value } = await makeRequest(`https://api.chucknorris.io/jokes/random${category ? `?category=${category}` : ''}`);
 
         dispatch({
             type: 'SET_RANDOM_JOKE',
-            payload: value
-        })
+            payload: {
+                randomJoke: value,
+                category
+            }
+        });
     } catch (e) {
         throw new Error(e);
     }
@@ -22,7 +25,7 @@ export const getCategories = () => async dispatch => {
 
         dispatch({
             type: 'SET_CATEGORIES',
-            payload: categories
+            payload: ['all categories', ...categories]
         })
     } catch (e) {
         throw new Error(e);

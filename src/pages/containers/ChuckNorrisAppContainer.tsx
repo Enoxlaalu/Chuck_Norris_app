@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
     getInitialData,
+    getRandomJoke,
     searchForJoke
 } from 'src/redux/actions';
 import {
@@ -8,8 +9,9 @@ import {
     useSelector
 } from 'react-redux';
 import {
+    getActiveCategorySelector,
     getCategoriesSelector,
-    getFoundJokesSelector,
+    getJokesListSelector,
     getRandomJokeSelector,
     getSearchAppliedSelector
 } from 'src/redux/selectors';
@@ -24,8 +26,9 @@ const ChuckNorrisAppContainer = () => {
     const dispatch = useDispatch();
     const randomJoke = useSelector(getRandomJokeSelector);
     const categories = useSelector(getCategoriesSelector);
-    const foundJokes = useSelector(getFoundJokesSelector);
+    const jokesList = useSelector(getJokesListSelector);
     const searchApplied = useSelector(getSearchAppliedSelector);
+    const activeCategory = useSelector(getActiveCategorySelector);
 
     React.useEffect(() => {
         dispatch(getInitialData());
@@ -33,23 +36,28 @@ const ChuckNorrisAppContainer = () => {
 
     if (!randomJoke || !categories.length) return null;
 
-    const makeSearch = (value, searchApplied) => dispatch(searchForJoke(value, searchApplied));
+    const makeSearch = value => dispatch(searchForJoke(value));
+
+    const setActiveCategory = category => dispatch(getRandomJoke(category));
 
     return (
         <div className={'contentBody'}>
             <header>
                 <h1>
-                    Welcome to Chuck Norris Joke App
+                    Welcome to Chuck Norris Jokes App
                 </h1>
             </header>
             <CategoriesPanel
                 categories={categories}
+                setActiveCategory={setActiveCategory}
+                activeCategory={activeCategory}
             />
             <MainContent
                 randomJoke={randomJoke}
                 makeSearch={makeSearch}
-                foundJokes={foundJokes}
+                jokesList={jokesList}
                 searchApplied={searchApplied}
+                activeCategory={activeCategory}
             />
         </div>
     )
