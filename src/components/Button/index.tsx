@@ -4,7 +4,7 @@ import './styles.less';
 
 interface IProps {
     text: string;
-    className: string;
+    className?: string;
     onClick: () => void
 }
 

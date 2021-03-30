@@ -7,9 +7,12 @@ import {
     useDispatch,
     useSelector
 } from 'react-redux';
-import { getCategoriesSelector,
+import {
+    getCategoriesSelector,
     getFoundJokesSelector,
-    getRandomJokeSelector } from 'src/redux/selectors';
+    getRandomJokeSelector,
+    getSearchAppliedSelector
+} from 'src/redux/selectors';
 import MainContent
     from 'src/pages/components/MainContent';
 import CategoriesPanel
@@ -22,6 +25,7 @@ const ChuckNorrisAppContainer = () => {
     const randomJoke = useSelector(getRandomJokeSelector);
     const categories = useSelector(getCategoriesSelector);
     const foundJokes = useSelector(getFoundJokesSelector);
+    const searchApplied = useSelector(getSearchAppliedSelector);
 
     React.useEffect(() => {
         dispatch(getInitialData());
@@ -29,7 +33,7 @@ const ChuckNorrisAppContainer = () => {
 
     if (!randomJoke || !categories.length) return null;
 
-    const makeSearch = value => dispatch(searchForJoke(value));
+    const makeSearch = (value, searchApplied) => dispatch(searchForJoke(value, searchApplied));
 
     return (
         <div className={'contentBody'}>
@@ -45,6 +49,7 @@ const ChuckNorrisAppContainer = () => {
                 randomJoke={randomJoke}
                 makeSearch={makeSearch}
                 foundJokes={foundJokes}
+                searchApplied={searchApplied}
             />
         </div>
     )

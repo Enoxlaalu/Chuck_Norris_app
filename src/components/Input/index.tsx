@@ -5,12 +5,14 @@ import './styles.less';
 interface IProps {
     onChange: (value: string) => void;
     placeholder: string;
-    value: string;
+    value?: string;
+    showCross?: boolean;
+    onCrossClick: () => void;
 }
 
-const Input: React.FC<IProps> = ({ onChange, placeholder, value }) => {
+const Input: React.FC<IProps> = ({ onChange, placeholder, value, showCross, onCrossClick }) => {
     const [focused, setFocused] = React.useState(false);
-    const [inputValue, setValue] = React.useState(value);
+    const [inputValue, setValue] = React.useState(value || '');
 
     const handleFocus = () => {
         setFocused(true);
@@ -27,6 +29,11 @@ const Input: React.FC<IProps> = ({ onChange, placeholder, value }) => {
         onChange && onChange(value);
     };
 
+    const handleCrossClick = () => {
+        setValue('');
+        onCrossClick && onCrossClick();
+    }
+
     return (
         <div
             className={`input ${focused ? 'focused' : ''}`}
@@ -39,6 +46,13 @@ const Input: React.FC<IProps> = ({ onChange, placeholder, value }) => {
                 placeholder={placeholder}
                 value={inputValue}
             />
+            {
+                showCross &&
+                <span
+                    className={'cross'}
+                    onClick={handleCrossClick}
+                />
+            }
         </div>
     );
 };

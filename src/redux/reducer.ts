@@ -3,7 +3,8 @@ import { IReducerState } from 'src/redux/types';
 const initialState = {
     randomJoke: '',
     categories: [],
-    foundJokes: []
+    foundJokes: [],
+    searchApplied: false
 };
 
 const rootReducer = (state: IReducerState = initialState, action) => {
@@ -21,9 +22,11 @@ const rootReducer = (state: IReducerState = initialState, action) => {
             }
         }
         case 'SET_FOUND_JOKES': {
+            const { jokesArray, searchApplied } = action.payload;
             return {
                 ...state,
-                foundJokes: action.payload
+                foundJokes: jokesArray,
+                searchApplied
             }
         }
         default: return state;

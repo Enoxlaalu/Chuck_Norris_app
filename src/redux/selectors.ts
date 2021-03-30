@@ -7,3 +7,5 @@ export const getRandomJokeSelector = createSelector(getState, data => data.rando
 export const getCategoriesSelector = createSelector(getState, data => data.categories);
 
 export const getFoundJokesSelector = createSelector(getState, data => data.foundJokes);
+
+export const getSearchAppliedSelector = createSelector(getState, data => data.searchApplied);

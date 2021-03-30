@@ -1,4 +1,16 @@
+@import "src/variables";
+
 .mainContent {
   padding: 24px;
   text-align: center;
+
+  & .searchWrapper {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-column-gap: 16px;
+  }
+
+  & .warning {
+    color: @red;
+  }
 }

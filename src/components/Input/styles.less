@@ -1,11 +1,12 @@
 @import "src/variables";
 
 .input {
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
   background-color: @grayTransparent;
   border-radius: 4px;
   transition: box-shadow 0.3s;
-  min-width: 400px;
 
   & input {
     border: none;
@@ -15,10 +16,53 @@
     font-size: 16px;
     line-height: 24px;
     color: @gray80;
-    padding: 16px;
+    padding: 10px 16px;
 
     &::placeholder {
       color: @gray70
+    }
+  }
+
+  .cross {
+    position: relative;
+    display: block;
+    width: 24px;
+    height: 24px;
+    transition: transform 0.4s;
+    cursor: pointer;
+    margin-right: 8px;
+
+    &:hover {
+      transform: rotate(180deg);
+      transition: transform 0.4s;
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 0;
+      width: 50%;
+      transition: border-color 0.4s;
+      pointer-events: none;
+      border: 1px solid @black;
+    }
+
+    &::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    &:hover::after,
+    &:hover::before {
+      border: 1px solid @red;
+      transition: border-color 0.4s;
     }
   }
 }

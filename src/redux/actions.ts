@@ -35,10 +35,23 @@ export const getInitialData = () => dispatch => {
 }
 
 export const searchForJoke = (value: string) => async dispatch => {
-    const { result } = await makeRequest(`https://api.chucknorris.io/jokes/search?query=${value}`);
+    let payload;
+
+    if (value) {
+        const { result } = await makeRequest(`https://api.chucknorris.io/jokes/search?query=${value}`);
+        payload = {
+            jokesArray: result.map(r => r.value),
+            searchApplied: true
+        };
+    } else {
+        payload = {
+            jokesArray: [],
+            searchApplied: false
+        }
+    }
 
     dispatch({
         type: 'SET_FOUND_JOKES',
-        payload: result.map(r => r.value)
-    })
+        payload
+    });
 }
