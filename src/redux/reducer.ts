@@ -30,7 +30,8 @@ const rootReducer = (state: IReducerState = initialState, action) => {
             return {
                 ...state,
                 jokesList: jokesArray,
-                searchApplied
+                searchApplied,
+                activeCategory: initialState.activeCategory
             }
         }
         default: return state;

@@ -19,6 +19,8 @@ import MainContent
     from 'src/pages/components/MainContent';
 import CategoriesPanel
     from 'src/pages/components/CategoriesPanel';
+import Hamburger
+    from 'src/components/Hamburger';
 
 import './styles.less';
 
@@ -29,6 +31,7 @@ const ChuckNorrisAppContainer = () => {
     const jokesList = useSelector(getJokesListSelector);
     const searchApplied = useSelector(getSearchAppliedSelector);
     const activeCategory = useSelector(getActiveCategorySelector);
+    const [categoriesPanelOpened, setCategoriesPanelOpened] = React.useState(false);
 
     React.useEffect(() => {
         dispatch(getInitialData());
@@ -40,17 +43,26 @@ const ChuckNorrisAppContainer = () => {
 
     const setActiveCategory = category => dispatch(getRandomJoke(category));
 
+    const toggleCategoriesPanel = () => setCategoriesPanelOpened(!categoriesPanelOpened);
+
     return (
         <div className={'contentBody'}>
             <header>
+                <Hamburger
+                    width={40}
+                    height={40}
+                    onClick={toggleCategoriesPanel}
+                    active={categoriesPanelOpened}
+                />
                 <h1>
-                    Welcome to Chuck Norris Jokes App
+                    Chuck Norris Jokes App
                 </h1>
             </header>
             <CategoriesPanel
                 categories={categories}
                 setActiveCategory={setActiveCategory}
                 activeCategory={activeCategory}
+                categoriesPanelOpened={categoriesPanelOpened}
             />
             <MainContent
                 randomJoke={randomJoke}

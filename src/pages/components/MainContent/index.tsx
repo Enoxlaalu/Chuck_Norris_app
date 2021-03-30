@@ -8,6 +8,8 @@ import Button
     from 'src/components/Button';
 import JokesList
     from 'src/pages/components/MainContent/JokesList';
+import Hamburger
+    from 'src/components/Hamburger';
 
 type TProps = Partial<IReducerState> & {
     makeSearch: (value: string) => void
