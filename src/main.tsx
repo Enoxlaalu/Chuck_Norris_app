@@ -19,7 +19,7 @@ const store = createStore(rootReducer,
     applyMiddleware(thunk)
 );
 
-const ChuckNorrisAppContainer = React.lazy(() => import('src/pages/containers/ChuckNorrisAppContainer'));
+const ChuckNorrisAppContainer = React.lazy(() => import('src/pages/ChuckNorrisAppPage'));
 
 const App = () => {
     return (

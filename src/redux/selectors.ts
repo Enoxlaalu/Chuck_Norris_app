@@ -11,3 +11,5 @@ export const getJokesListSelector = createSelector(getState, data => data.jokesL
 export const getSearchAppliedSelector = createSelector(getState, data => data.searchApplied);
 
 export const getActiveCategorySelector = createSelector(getState, data => data.activeCategory);
+
+export const getCategoriesPanelOpenedSelector = createSelector(getState, data => data.categoriesPanelOpened);

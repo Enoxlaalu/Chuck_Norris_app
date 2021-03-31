@@ -58,3 +58,8 @@ export const searchForJoke = (value: string) => async dispatch => {
         payload
     });
 }
+
+export const setCategoriesPanelOpened = opened => ({
+    type: 'SET_CATEGORIES_PANEL_OPENED',
+    payload: opened
+});

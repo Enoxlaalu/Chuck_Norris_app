@@ -34,6 +34,12 @@ const rootReducer = (state: IReducerState = initialState, action) => {
                 activeCategory: initialState.activeCategory
             }
         }
+        case 'SET_CATEGORIES_PANEL_OPENED': {
+            return {
+                ...state,
+                categoriesPanelOpened: action.payload
+            }
+        }
         default: return state;
     }
 };
