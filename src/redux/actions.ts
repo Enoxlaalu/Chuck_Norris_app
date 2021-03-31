@@ -43,7 +43,7 @@ export const searchForJoke = (value: string) => async dispatch => {
     if (value) {
         const { result } = await makeRequest(`https://api.chucknorris.io/jokes/search?query=${value}`);
         payload = {
-            jokesArray: result.map(r => r.value),
+            jokesArray: result,
             searchApplied: true
         };
     } else {

@@ -9,8 +9,10 @@ const JokesList: React.FC<Partial<IReducerState>> = ({ jokesList }) => {
             {
                 jokesList.map(joke => {
                     return (
-                        <li>
-                            {joke}
+                        <li
+                            key={joke.id}
+                        >
+                            {joke.value}
                         </li>
                     );
                 })

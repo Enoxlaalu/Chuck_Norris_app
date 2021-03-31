@@ -1,7 +1,10 @@
 export interface IReducerState {
     randomJoke: string,
     categories: string[],
-    jokesList: string[],
+    jokesList: Array<{
+        id: string,
+        value: string
+    }>,
     searchApplied: boolean,
     activeCategory: string
 }

@@ -67,6 +67,7 @@ const MainContent: React.FC<TProps> = ({ randomJoke, makeSearch, jokesList, sear
                 // shows cross icon if there's some value in input
                 showCross={!!inputValue}
                 onCrossClick={onCrossClick}
+                applySearch={onSearchButtonClick}
             />
             <Button
                 text={'Search'}

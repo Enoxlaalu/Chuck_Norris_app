@@ -41,7 +41,12 @@ const ChuckNorrisAppContainer = () => {
 
     const makeSearch = value => dispatch(searchForJoke(value));
 
-    const setActiveCategory = category => dispatch(getRandomJoke(category));
+    const setActiveCategory = category => {
+        if (categoriesPanelOpened) {
+            setCategoriesPanelOpened(false);
+        }
+        dispatch(getRandomJoke(category));
+    };
 
     const toggleCategoriesPanel = () => setCategoriesPanelOpened(!categoriesPanelOpened);
 
