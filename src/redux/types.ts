@@ -7,5 +7,6 @@ export interface IReducerState {
     }>,
     searchApplied: boolean,
     activeCategory: string,
-    error: string
+    error: string,
+    jokesLoading: boolean
 }

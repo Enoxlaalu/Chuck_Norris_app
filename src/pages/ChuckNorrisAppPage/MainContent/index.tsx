@@ -2,39 +2,34 @@ import * as React from 'react';
 import 'src/pages/ChuckNorrisAppPage/MainContent/styles.less';
 import Input from 'src/components/Input';
 import Button from 'src/components/Button';
-import JokesList from 'src/pages/ChuckNorrisAppPage/MainContent/JokesList';
 import {
     useDispatch,
     useSelector
 } from 'react-redux';
 import {
-    getActiveCategorySelector,
-    getErrorSelector,
-    getJokesListSelector,
-    getRandomJokeSelector,
-    getSearchAppliedSelector
+    getInputValueSelector,
 } from 'src/redux/selectors';
 import {
+    clearContent,
     getRandomJoke,
     searchForJoke,
+    setInputValue,
     showError
 } from 'src/redux/actions';
+import JokesSection
+    from 'src/pages/ChuckNorrisAppPage/MainContent/JokesSection';
 
 const MainContent: React.FC = () => {
     const dispatch = useDispatch();
-    const randomJoke = useSelector(getRandomJokeSelector);
-    const jokesList = useSelector(getJokesListSelector);
-    const searchApplied = useSelector(getSearchAppliedSelector);
-    const activeCategory = useSelector(getActiveCategorySelector);
-    const error = useSelector(getErrorSelector);
+    const inputValue = useSelector(getInputValueSelector);
 
-    const [inputValue, setInputValue] = React.useState('');
+    console.log('rendering content');
 
     React.useEffect(() => {
         dispatch(getRandomJoke());
     }, []);
 
-    const handleInputChange = (value) => setInputValue(value);
+    const handleInputChange = (value) => dispatch(setInputValue(value));
 
     const validateValue = () => {
         if (inputValue.length < 3 || inputValue.length > 120) {
@@ -47,50 +42,21 @@ const MainContent: React.FC = () => {
         }
     };
 
-    const makeSearch = value => dispatch(searchForJoke(value));
+    const makeSearch = () => dispatch(searchForJoke(inputValue));
 
     const onSearchButtonClick = () => {
-        validateValue() && makeSearch(inputValue);
+        validateValue() && makeSearch();
     };
 
-    const onCrossClick = () => {
-        setInputValue('');
-        makeSearch('');
-    };
-
-    const renderContent = () => {
-        if (error) return <p className={'warning'}>{error}</p>;
-        if (searchApplied) {
-            if (jokesList.length) {
-                return <JokesList jokesList={jokesList} />;
-            } else {
-                return (
-                    <p>Sorry, no jokes for current query :( Try another one!</p>
-                );
-            }
-        } else {
-            return (
-                <>
-                    <h2>
-                        Random Joke
-                        {!activeCategory.includes('all')
-                            ? ` from ${activeCategory.toUpperCase()} category`
-                            : ''}
-                        :
-                    </h2>
-                    {randomJoke}
-                </>
-            );
-        }
-    };
+    const onCrossClick = () => dispatch(clearContent);
 
     return (
         <main className={'mainContent'}>
             <div className={'searchWrapper'}>
                 <Input
-                    onChange={handleInputChange}
+                    onBlur={handleInputChange}
                     placeholder={'Search for joke...'}
-                    // value={inputValue}
+                    value={inputValue}
                     // shows cross icon if there's some value in input
                     showCross={!!inputValue}
                     onCrossClick={onCrossClick}
@@ -101,7 +67,9 @@ const MainContent: React.FC = () => {
                     onClick={onSearchButtonClick}
                 />
             </div>
-            <section className={'jokesWrapper'}>{renderContent()}</section>
+            <section className={'jokesWrapper'}>
+                <JokesSection />
+            </section>
         </main>
     );
 };

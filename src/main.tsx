@@ -1,10 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Loader
-    from 'src/components/Loader';
 import 'regenerator-runtime/runtime';
 import { Provider } from 'react-redux';
-const ChuckNorrisAppContainer = React.lazy(() => import('src/pages/ChuckNorrisAppPage'));
+import ChuckNorrisAppPage
+    from 'src/pages/ChuckNorrisAppPage';
 import {
     applyMiddleware,
     createStore
@@ -23,9 +22,7 @@ import 'src/global.less';
 const App = () => {
     return (
         <Provider store={store}>
-            <React.Suspense fallback={<Loader />}>
-                <ChuckNorrisAppContainer />
-            </React.Suspense>
+            <ChuckNorrisAppPage />
         </Provider>
     );
 };

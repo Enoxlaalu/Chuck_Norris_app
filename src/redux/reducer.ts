@@ -2,11 +2,13 @@ import { IReducerState } from 'src/redux/types';
 
 const initialState = {
     randomJoke: '',
-    categories: [],
+    categories: null,
     jokesList: [],
     searchApplied: false,
     activeCategory: 'all categories',
-    error: ''
+    error: '',
+    inputValue: '',
+    jokesLoading: false
 };
 
 const rootReducer = (state: IReducerState = initialState, action) => {
@@ -18,7 +20,11 @@ const rootReducer = (state: IReducerState = initialState, action) => {
                 ...state,
                 randomJoke,
                 activeCategory: category ? category : initialState.activeCategory,
-                error: ''
+                error: '',
+                jokesList: [],
+                searchApplied: false,
+                inputValue: '',
+                jokesLoading: false
             };
         }
         case 'SET_CATEGORIES': {
@@ -35,7 +41,8 @@ const rootReducer = (state: IReducerState = initialState, action) => {
                 jokesList: jokesArray,
                 searchApplied,
                 activeCategory: initialState.activeCategory,
-                error: ''
+                error: '',
+                jokesLoading: false
             };
         }
         case 'SET_CATEGORIES_PANEL_OPENED': {
@@ -48,6 +55,26 @@ const rootReducer = (state: IReducerState = initialState, action) => {
             return {
                 ...state,
                 error: action.payload
+            };
+        }
+        case 'SET_INPUT_VALUE': {
+            return {
+                ...state,
+                inputValue: action.payload
+            };
+        }
+        case 'CLEAR_CONTENT': {
+            return {
+                ...state,
+                inputValue: '',
+                jokesList: [],
+                searchApplied: false
+            };
+        }
+        case 'SET_JOKES_LOADING': {
+            return {
+                ...state,
+                jokesLoading: true
             };
         }
         default: return state;

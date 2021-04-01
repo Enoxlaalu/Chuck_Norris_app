@@ -1,11 +1,17 @@
 import { IReducerState } from 'src/redux/types';
 
+export const setJokesLoading = ({
+    type: 'SET_JOKES_LOADING'
+});
+
 const makeRequest = async (url: string) => {
     const response = await fetch(url);
     return await response.json();
 };
 
 export const getRandomJoke = (category?: Pick<IReducerState, 'activeCategory'>) => async dispatch => {
+    dispatch(setJokesLoading);
+
     try {
         const { value } = await makeRequest(`https://api.chucknorris.io/jokes/random${category ? `?category=${category}` : ''}`);
 
@@ -35,20 +41,13 @@ export const getCategories = () => async dispatch => {
 };
 
 export const searchForJoke = (value: string) => async dispatch => {
-    let payload;
+    dispatch(setJokesLoading);
 
-    if (value) {
-        const { result } = await makeRequest(`https://api.chucknorris.io/jokes/search?query=${value}`);
-        payload = {
-            jokesArray: result,
-            searchApplied: true
-        };
-    } else {
-        payload = {
-            jokesArray: [],
-            searchApplied: false
-        };
-    }
+    const { result } = await makeRequest(`https://api.chucknorris.io/jokes/search?query=${value}`);
+    const payload = {
+        jokesArray: result,
+        searchApplied: true
+    };
 
     dispatch({
         type: 'SET_FOUND_JOKES',
@@ -64,4 +63,13 @@ export const setCategoriesPanelOpened = (opened: boolean) => ({
 export const showError = (value: string) => ({
     type: 'SHOW_ERROR',
     payload: value
+});
+
+export const setInputValue = (value: string) => ({
+    type: 'SET_INPUT_VALUE',
+    payload: value
+});
+
+export const clearContent = ({
+    type: 'CLEAR_CONTENT'
 });

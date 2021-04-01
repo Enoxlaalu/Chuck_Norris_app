@@ -15,8 +15,6 @@ import CategoriesPanel
     from 'src/pages/ChuckNorrisAppPage/CategoriesPanel';
 import Hamburger
     from 'src/components/Hamburger';
-import Loader
-    from 'src/components/Loader';
 
 import './styles.less';
 
@@ -39,9 +37,7 @@ const ChuckNorrisAppPage = () => {
                     Chuck Norris Jokes App
                 </h1>
             </header>
-            <React.Suspense fallback={<Loader />}>
-                <CategoriesPanel />
-            </React.Suspense>
+            <CategoriesPanel />
             <MainContent />
         </div>
     );

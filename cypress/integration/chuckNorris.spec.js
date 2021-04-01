@@ -77,6 +77,29 @@ describe('Chuck Norris app tests', () => {
             .should('exist')
             .should('contain', 'CAREER');
     });
+    it('clears search result and input value on category click', () => {
+        cy.intercept('/search').as('search');
+
+        cy.get('.searchWrapper input')
+            .type('allow')
+            .should('have.value', 'allow');
+        cy.get('.searchWrapper button')
+            .click();
+
+        cy.wait('@search');
+
+        cy.get('.jokesList li')
+            .should('have.length', 64);
+
+        cy.get('.categoriesPanel li:last-of-type')
+            .should('contain', 'travel')
+            .click();
+        cy.get('.jokesWrapper h2')
+            .should('exist')
+            .should('contain', 'TRAVEL');
+        cy.get('.searchWrapper input')
+            .should('have.value', '');
+    });
     it('opens category panel from mobile view', () => {
         cy.viewport(520, 768);
         cy.get('.categoriesPanel')

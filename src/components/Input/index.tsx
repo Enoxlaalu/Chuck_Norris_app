@@ -3,7 +3,8 @@ import * as React from 'react';
 import './styles.less';
 
 interface IProps {
-    onChange: (value: string) => void;
+    onChange?: (value: string) => void;
+    onBlur: (value: string) => void;
     placeholder: string;
     value?: string;
     showCross?: boolean;
@@ -18,16 +19,25 @@ const Input: React.FC<IProps> = ({
     showCross,
     onCrossClick,
     applySearch,
+    onBlur
 }) => {
     const [focused, setFocused] = React.useState(false);
     const [inputValue, setValue] = React.useState(value || '');
+
+    React.useEffect(() => {
+        setValue(value);
+    }, [value]);
 
     const handleFocus = () => {
         setFocused(true);
     };
 
-    const handleBlur = () => {
+    const handleBlur = (e) => {
+        const { value } = e.target;
+
         setFocused(false);
+
+        onBlur && onBlur(value);
     };
 
     const handleChange = (e) => {

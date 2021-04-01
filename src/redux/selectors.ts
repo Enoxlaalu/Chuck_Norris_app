@@ -15,3 +15,7 @@ export const getActiveCategorySelector = createSelector(getState, data => data.a
 export const getCategoriesPanelOpenedSelector = createSelector(getState, data => data.categoriesPanelOpened);
 
 export const getErrorSelector = createSelector(getState, data => data.error);
+
+export const getInputValueSelector = createSelector(getState, data => data.inputValue);
+
+export const getJokesLoadingSelector = createSelector(getState, data => data.jokesLoading);
