@@ -17,6 +17,7 @@
     top: @headerHeight;
     transform: translateX(-100%);
     height: calc(100% - @headerHeight);
+    z-index: 1;
 
     &.opened {
       transform: translateX(0);
@@ -30,6 +31,7 @@
   ul {
     text-transform: uppercase;
     overflow: auto;
+    height: 100%;
   }
 
   li {
@@ -62,5 +64,9 @@
   @media @mobile {
     right: 0;
     transform: translateX(100%);
+
+    &.opened {
+      transform: translateX(0);
+    }
   }
 }

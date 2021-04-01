@@ -110,6 +110,8 @@ describe('Chuck Norris app tests', () => {
             .click();
         cy.get('.categoriesPanel')
             .should('have.class', 'opened');
+        cy.get('.mainContent')
+            .should('have.class', 'disabled');
     });
     it('hides category panel when choosing a category on mobile view', () => {
         cy.viewport(520, 768);

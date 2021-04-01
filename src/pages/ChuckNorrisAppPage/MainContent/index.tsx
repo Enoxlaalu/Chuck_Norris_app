@@ -7,6 +7,7 @@ import {
     useSelector
 } from 'react-redux';
 import {
+    getCategoriesPanelOpenedSelector,
     getInputValueSelector,
 } from 'src/redux/selectors';
 import {
@@ -25,6 +26,7 @@ const MAX_LENGTH = 120;
 const MainContent: React.FC = () => {
     const dispatch = useDispatch();
     const inputValue = useSelector(getInputValueSelector);
+    const categoriesPanelOpened = useSelector(getCategoriesPanelOpenedSelector);
 
     console.log('rendering content');
 
@@ -56,10 +58,10 @@ const MainContent: React.FC = () => {
     const onCrossClick = () => dispatch(clearContent);
 
     return (
-        <main className={'mainContent'}>
+        <main className={`mainContent ${categoriesPanelOpened ? 'disabled' : ''}`}>
             <div className={'searchWrapper'}>
                 <Input
-                    onBlur={handleInputChange}
+                    onChange={handleInputChange}
                     placeholder={'Search for joke...'}
                     value={inputValue}
                     // shows cross icon if there's some value in input

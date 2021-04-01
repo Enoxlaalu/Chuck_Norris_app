@@ -4,7 +4,7 @@ import './styles.less';
 
 interface IProps {
     onChange?: (value: string) => void;
-    onBlur: (value: string) => void;
+    onBlur?: (value: string) => void;
     placeholder: string;
     value?: string;
     showCross?: boolean;
