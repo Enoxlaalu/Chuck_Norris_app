@@ -4,8 +4,7 @@ import Loader
     from 'src/components/Loader';
 import 'regenerator-runtime/runtime';
 import { Provider } from 'react-redux';
-
-import 'src/global.less';
+const ChuckNorrisAppContainer = React.lazy(() => import('src/pages/ChuckNorrisAppPage'));
 import {
     applyMiddleware,
     createStore
@@ -19,7 +18,7 @@ const store = createStore(rootReducer,
     applyMiddleware(thunk)
 );
 
-const ChuckNorrisAppContainer = React.lazy(() => import('src/pages/ChuckNorrisAppPage'));
+import 'src/global.less';
 
 const App = () => {
     return (

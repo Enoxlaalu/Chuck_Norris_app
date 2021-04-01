@@ -1,9 +1,11 @@
-const makeRequest = async (url) => {
+import { IReducerState } from 'src/redux/types';
+
+const makeRequest = async (url: string) => {
     const response = await fetch(url);
     return await response.json();
-}
+};
 
-export const getRandomJoke = (category?: string) => async dispatch => {
+export const getRandomJoke = (category?: Pick<IReducerState, 'activeCategory'>) => async dispatch => {
     try {
         const { value } = await makeRequest(`https://api.chucknorris.io/jokes/random${category ? `?category=${category}` : ''}`);
 
@@ -26,16 +28,11 @@ export const getCategories = () => async dispatch => {
         dispatch({
             type: 'SET_CATEGORIES',
             payload: ['all categories', ...categories]
-        })
+        });
     } catch (e) {
         throw new Error(e);
     }
 };
-
-export const getInitialData = () => dispatch => {
-    dispatch(getRandomJoke());
-    dispatch(getCategories());
-}
 
 export const searchForJoke = (value: string) => async dispatch => {
     let payload;
@@ -50,16 +47,21 @@ export const searchForJoke = (value: string) => async dispatch => {
         payload = {
             jokesArray: [],
             searchApplied: false
-        }
+        };
     }
 
     dispatch({
         type: 'SET_FOUND_JOKES',
         payload
     });
-}
+};
 
-export const setCategoriesPanelOpened = opened => ({
+export const setCategoriesPanelOpened = (opened: boolean) => ({
     type: 'SET_CATEGORIES_PANEL_OPENED',
     payload: opened
+});
+
+export const showError = (value: string) => ({
+    type: 'SHOW_ERROR',
+    payload: value
 });

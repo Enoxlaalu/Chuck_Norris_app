@@ -9,11 +9,16 @@ import {
 } from 'react-redux';
 import {
     getActiveCategorySelector,
+    getErrorSelector,
     getJokesListSelector,
     getRandomJokeSelector,
     getSearchAppliedSelector
 } from 'src/redux/selectors';
-import { searchForJoke } from 'src/redux/actions';
+import {
+    getRandomJoke,
+    searchForJoke,
+    showError
+} from 'src/redux/actions';
 
 const MainContent: React.FC = () => {
     const dispatch = useDispatch();
@@ -21,19 +26,23 @@ const MainContent: React.FC = () => {
     const jokesList = useSelector(getJokesListSelector);
     const searchApplied = useSelector(getSearchAppliedSelector);
     const activeCategory = useSelector(getActiveCategorySelector);
+    const error = useSelector(getErrorSelector);
 
     const [inputValue, setInputValue] = React.useState('');
-    const [error, showError] = React.useState('');
+
+    React.useEffect(() => {
+        dispatch(getRandomJoke());
+    }, []);
 
     const handleInputChange = (value) => setInputValue(value);
 
     const validateValue = () => {
         if (inputValue.length < 3 || inputValue.length > 120) {
-            showError(
+            dispatch(showError(
                 'Search value must be more than 3 and less than 120 digits'
-            );
+            ));
         } else {
-            showError('');
+            dispatch(showError(''));
             return true;
         }
     };
@@ -45,7 +54,6 @@ const MainContent: React.FC = () => {
     };
 
     const onCrossClick = () => {
-        showError('');
         setInputValue('');
         makeSearch('');
     };

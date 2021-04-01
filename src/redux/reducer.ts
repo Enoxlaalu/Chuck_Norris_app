@@ -5,7 +5,8 @@ const initialState = {
     categories: [],
     jokesList: [],
     searchApplied: false,
-    activeCategory: 'all categories'
+    activeCategory: 'all categories',
+    error: ''
 };
 
 const rootReducer = (state: IReducerState = initialState, action) => {
@@ -16,29 +17,38 @@ const rootReducer = (state: IReducerState = initialState, action) => {
             return {
                 ...state,
                 randomJoke,
-                activeCategory: category ? category : initialState.activeCategory
-            }
+                activeCategory: category ? category : initialState.activeCategory,
+                error: ''
+            };
         }
         case 'SET_CATEGORIES': {
             return {
                 ...state,
                 categories: action.payload
-            }
+            };
         }
         case 'SET_FOUND_JOKES': {
             const { jokesArray, searchApplied } = action.payload;
+
             return {
                 ...state,
                 jokesList: jokesArray,
                 searchApplied,
-                activeCategory: initialState.activeCategory
-            }
+                activeCategory: initialState.activeCategory,
+                error: ''
+            };
         }
         case 'SET_CATEGORIES_PANEL_OPENED': {
             return {
                 ...state,
                 categoriesPanelOpened: action.payload
-            }
+            };
+        }
+        case 'SHOW_ERROR': {
+            return {
+                ...state,
+                error: action.payload
+            };
         }
         default: return state;
     }

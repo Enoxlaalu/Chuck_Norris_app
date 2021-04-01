@@ -1,4 +1,4 @@
-@import "../../../variables";
+@import "src/variables";
 
 .mainContent {
   display: grid;
@@ -7,21 +7,21 @@
   padding: 24px;
   text-align: center;
 
-  & h2 {
+  h2 {
     margin: 18px 0;
   }
 
-  & .searchWrapper {
+  .searchWrapper {
     display: grid;
     grid-template-columns: 1fr auto;
     grid-column-gap: 16px;
   }
 
-  & .warning {
+  .warning {
     color: @red;
   }
 
-  & .jokesWrapper {
+  .jokesWrapper {
     overflow: auto;
     padding-top: 16px;
   }

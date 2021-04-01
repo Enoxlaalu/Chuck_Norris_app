@@ -6,5 +6,6 @@ export interface IReducerState {
         value: string
     }>,
     searchApplied: boolean,
-    activeCategory: string
+    activeCategory: string,
+    error: string
 }

@@ -13,3 +13,5 @@ export const getSearchAppliedSelector = createSelector(getState, data => data.se
 export const getActiveCategorySelector = createSelector(getState, data => data.activeCategory);
 
 export const getCategoriesPanelOpenedSelector = createSelector(getState, data => data.categoriesPanelOpened);
+
+export const getErrorSelector = createSelector(getState, data => data.error);

@@ -15,10 +15,10 @@ import CategoriesPanel
     from 'src/pages/ChuckNorrisAppPage/CategoriesPanel';
 import Hamburger
     from 'src/components/Hamburger';
-
-import './styles.less';
 import Loader
     from 'src/components/Loader';
+
+import './styles.less';
 
 const ChuckNorrisAppPage = () => {
     const dispatch = useDispatch();

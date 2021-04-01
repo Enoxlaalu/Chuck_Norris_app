@@ -11,7 +11,14 @@ interface IProps {
     applySearch?: () => void;
 }
 
-const Input: React.FC<IProps> = ({ onChange, placeholder, value, showCross, onCrossClick, applySearch }) => {
+const Input: React.FC<IProps> = ({
+    onChange,
+    placeholder,
+    value,
+    showCross,
+    onCrossClick,
+    applySearch,
+}) => {
     const [focused, setFocused] = React.useState(false);
     const [inputValue, setValue] = React.useState(value || '');
 
@@ -33,18 +40,16 @@ const Input: React.FC<IProps> = ({ onChange, placeholder, value, showCross, onCr
     const handleCrossClick = () => {
         setValue('');
         onCrossClick && onCrossClick();
-    }
+    };
 
-    const handleKeyDown = e => {
+    const handleKeyDown = (e) => {
         if (e.code === 'Enter' && applySearch) {
             applySearch();
         }
     };
 
     return (
-        <div
-            className={`input ${focused ? 'focused' : ''}`}
-        >
+        <div className={`input ${focused ? 'focused' : ''}`}>
             <input
                 type="text"
                 onFocus={handleFocus}
@@ -54,13 +59,9 @@ const Input: React.FC<IProps> = ({ onChange, placeholder, value, showCross, onCr
                 placeholder={placeholder}
                 value={inputValue}
             />
-            {
-                showCross &&
-                <span
-                    className={'cross'}
-                    onClick={handleCrossClick}
-                />
-            }
+            {showCross && (
+                <span className={'cross'} onClick={handleCrossClick} />
+            )}
         </div>
     );
 };

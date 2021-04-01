@@ -10,10 +10,6 @@ interface IProps {
 }
 
 const Hamburger: React.FC<IProps> = ({ width, height, onClick, active }) => {
-    // const [active, toggleActive] = React.useState(false);
-    //
-    // const onClick = () => toggleActive(!active);
-
     const style = {
         width: `${width}px`,
         height: `${height}px`
