@@ -19,6 +19,9 @@ import {
 import JokesSection
     from 'src/pages/ChuckNorrisAppPage/MainContent/JokesSection';
 
+const MIN_LENGTH = 3;
+const MAX_LENGTH = 120;
+
 const MainContent: React.FC = () => {
     const dispatch = useDispatch();
     const inputValue = useSelector(getInputValueSelector);
@@ -31,8 +34,10 @@ const MainContent: React.FC = () => {
 
     const handleInputChange = (value) => dispatch(setInputValue(value));
 
+    // Chuck Norris Api responses error if query length is incorrect
+    // if validation fails - do not send request, but show warning
     const validateValue = () => {
-        if (inputValue.length < 3 || inputValue.length > 120) {
+        if (inputValue.length < MIN_LENGTH || inputValue.length > MAX_LENGTH) {
             dispatch(showError(
                 'Search value must be more than 3 and less than 120 digits'
             ));

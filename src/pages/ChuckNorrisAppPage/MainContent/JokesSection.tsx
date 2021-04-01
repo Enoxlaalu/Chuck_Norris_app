@@ -21,8 +21,7 @@ const JokesSection: React.FC = React.memo(() => {
     const error = useSelector(getErrorSelector);
     const jokesLoading = useSelector(getJokesLoadingSelector);
 
-    console.log('rendering section');
-
+    // shows spinner for user
     if (jokesLoading) return <Loader />;
 
     if (error) return <p className={'warning'}>{error}</p>;

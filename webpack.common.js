@@ -46,11 +46,14 @@ module.exports = {
         ]
     },
     plugins: [
+        // remove/clean your build folder(s)
         new CleanWebpackPlugin(),
+        // generate an HTML5 file for you that includes all your webpack bundles
         new HtmlWebpackPlugin({
             template: path.join(__dirname, '/index.html.tpl'),
             sha: process.env.CI_COMMIT_SHORT_SHA
         }),
+        // extracts CSS into separate files
         new MiniCssExtractPlugin()
     ],
     optimization: {

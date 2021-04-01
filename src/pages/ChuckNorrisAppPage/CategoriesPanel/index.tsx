@@ -13,8 +13,6 @@ import CategoriesList
 const CategoriesPanel: React.FC = () => {
     const categoriesPanelOpened = useSelector(getCategoriesPanelOpenedSelector);
 
-    console.log('rendering categories');
-
     return (
         <aside
             className={`categoriesPanel ${

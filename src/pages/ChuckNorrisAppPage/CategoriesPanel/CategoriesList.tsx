@@ -22,8 +22,6 @@ const CategoriesList: React.FC = () => {
     const categories = useSelector(getCategoriesSelector);
     const activeCategory = useSelector(getActiveCategorySelector);
 
-    console.log('rendering categories list');
-
     const setActiveCategory = category => {
         if (categoriesPanelOpened) {
             dispatch(setCategoriesPanelOpened(false));

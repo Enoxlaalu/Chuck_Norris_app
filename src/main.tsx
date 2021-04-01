@@ -13,7 +13,9 @@ import thunk
 import rootReducer
     from 'src/redux/reducer';
 
+// Creates a Redux store
 const store = createStore(rootReducer,
+    // allows you to write action creators that return a function instead of an action
     applyMiddleware(thunk)
 );
 
@@ -21,6 +23,7 @@ import 'src/global.less';
 
 const App = () => {
     return (
+        // makes the Redux store available to any nested components
         <Provider store={store}>
             <ChuckNorrisAppPage />
         </Provider>

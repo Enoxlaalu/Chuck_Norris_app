@@ -22,6 +22,7 @@ const ChuckNorrisAppPage = () => {
     const dispatch = useDispatch();
     const categoriesPanelOpened = useSelector(getCategoriesPanelOpenedSelector);
 
+    // toggles left panel on mobile view
     const toggleCategoriesPanel = () => dispatch(setCategoriesPanelOpened(!categoriesPanelOpened));
 
     return (

@@ -19,6 +19,7 @@ const rootReducer = (state: IReducerState = initialState, action) => {
             return {
                 ...state,
                 randomJoke,
+                // if no category passed - show 'all categories'
                 activeCategory: category ? category : initialState.activeCategory,
                 error: '',
                 jokesList: [],

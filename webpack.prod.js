@@ -6,6 +6,12 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 module.exports = merge(common, {
     mode: 'production',
     optimization: {
-        minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
-    }
+        minimizer: [
+            // This plugin uses terser to minify your JavaScript.
+            // terser - A JavaScript parser and mangler/compressor toolkit for ES6+.
+            new TerserJSPlugin({}),
+            // A Webpack plugin to optimize \ minimize CSS assets.
+            new OptimizeCSSAssetsPlugin({})
+        ],
+    },
 });

@@ -1,3 +1,5 @@
+// use reselect library for caching selectors' data
+
 import { createSelector } from 'reselect';
 
 const getState = state => state;

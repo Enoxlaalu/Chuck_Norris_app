@@ -4,6 +4,7 @@ export const setJokesLoading = ({
     type: 'SET_JOKES_LOADING'
 });
 
+// pattern for all requests
 const makeRequest = async (url: string) => {
     const response = await fetch(url);
     return await response.json();
@@ -33,6 +34,7 @@ export const getCategories = () => async dispatch => {
 
         dispatch({
             type: 'SET_CATEGORIES',
+            // adds all categories because we can receive jokes from all collection
             payload: ['all categories', ...categories]
         });
     } catch (e) {
@@ -46,6 +48,7 @@ export const searchForJoke = (value: string) => async dispatch => {
     const { result } = await makeRequest(`https://api.chucknorris.io/jokes/search?query=${value}`);
     const payload = {
         jokesArray: result,
+        // adds this flag to determine if we are searching now, but there's no jokes on our request
         searchApplied: true
     };
 
@@ -70,6 +73,7 @@ export const setInputValue = (value: string) => ({
     payload: value
 });
 
+// clears inputValue and all jokes results on cross click
 export const clearContent = ({
     type: 'CLEAR_CONTENT'
 });
